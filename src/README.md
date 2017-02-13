@@ -464,12 +464,12 @@ document.getElementById('loadDogButton')
 
 ## Webpack 2
 
-- [Webpack 2](https://webpack.js.org/) is still in beta but now offers native *ES2015* and *System.js* support.
-- Loads modules written in AMD, CommonJS and ES2015.
-- Performs bundling and tree-shaking.
-- [What's new in webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7)
-- [Roadmap](https://webpack.github.io/docs/roadmap.html)
-- [github.com/tiagorg/lazy-load-es2015-webpack2](https://github.com/tiagorg/lazy-load-es2015-webpack2)
+- Webpack is a module bundler constituted of [Entries, Outputs, Loaders and Plugins](https://webpack.js.org/concepts/).
+- [Webpack 2](https://webpack.js.org/) (just released) now offers native *ES2015 modules* and *System.js* support.
+- Loads JS modules in AMD, CommonJS and ES2015 (and also TypeScript and CoffeeScript).
+- Performs bundling (importing the dependency graph in the right order).
+- Lazy-loads JS and CSS (code splitting).
+- Performs tree-shaking.
 
 ---
 
@@ -498,7 +498,7 @@ document.getElementById('loadDogButton')
 
 # Thanks!
 
-- Special thanks to Avenue Code, Mobile+Web DevCon crew, all the speakers and most importantly all the attendees!
+- Special thanks to Avenue Code, Mobile+Web DevCon crew and most importantly all the attendees!
 - Slides: [tiagorg.com/lab-lazy-loading-es2015-modules](http://tiagorg.com/lab-lazy-loading-es2015-modules)
 - Github: [github.com/tiagorg/lab-lazy-loading-es2015-modules](https://github.com/tiagorg/lab-lazy-loading-es2015-modules)
 - More talks at [tiagorg.com](http://tiagorg.com)
