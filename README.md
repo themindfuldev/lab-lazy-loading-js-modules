@@ -372,7 +372,7 @@ define('main', [], function() {
 
 - Using [Webpack](https://webpack.js.org)'s *`require.ensure`*
 
-```
+```javascript
 // main.js
 document.getElementById('loadDogButton')
         .addEventListener('click', function(e) {
@@ -397,7 +397,8 @@ document.getElementById('loadDogButton')
 ## ES2015 Modules
 
 - ES2015 offers native Modules which are quite a bit similar to CommonJS.
-```
+
+```javascript
 // dog.js
 let getBarkStyle = function(breed) {
   return breed === 'husky'? 'woooooow!': 'woof, woof!';
@@ -419,15 +420,10 @@ export class Dog {
 
 ## ES2015 Module Loader
 
-- ES2015 Modules are not yet natively supported by browsers & Node.js.
-- You can use it right now with a transpiler as [Babel.js](https://babeljs.io/).
+- ES2015 Modules are not yet natively supported by all browsers & Node.js.
+- You can use them right now with a transpiler as [Babel.js](https://babeljs.io/).
 - Consider a module loader such as [System.js](https://github.com/systemjs/systemjs), which supports AMD, CommonJS, ES2015 and global.
-
-
-- ES2015 doesn't actually have a module loader specification
-- A popular proposal has been retreated: [es6-module-loader](https://github.com/ModuleLoader/es6-module-loader)
-- Such proposal uses a promises-based API which inspired *System.js*
-- A new proposal is in the works by WhatWG for ES2016: [Loader](https://whatwg.github.io/loader/)
+- The Module Loader spec is in the works by WhatWG: [Loader](https://whatwg.github.io/loader/).
 
 ----
 
@@ -437,19 +433,20 @@ export class Dog {
 - Is performs asynchronous module loading using a Promises-based API.
 - Promises can be chained and combined.
 - *`Promises.all `* can load multiple modules in parallel.
+- System.js 0.2.0 ships with [dynamic import()](https://github.com/tc39/proposal-dynamic-import).
 
 ----
 
 ## Lazy-loading in System.js
 
-- Using *`System.import`* and getting a promise
+- Using the [`import()` operator](http://www.2ality.com/2017/01/import-operator.html)
 
 ```
 // main.js
 document.getElementById('loadDogButton')
         .addEventListener('click', e => {
   // Lazy-loading dog module
-  System.import('dog').then(Dog => {
+  import('dog').then(Dog => {
     let dogContainer = document.getElementById('dogContainer');
 
     let sherlock = new Dog('Sherlock', 'beagle');
@@ -457,6 +454,8 @@ document.getElementById('loadDogButton')
 
     let whisky = new Dog('Whisky', 'husky');
     dogContainer.innerHTML += `<br/>${whisky.bark()}`;
+  })).catch(err => {
+    console.log("Module loading failed");
   });
 });
 ```
