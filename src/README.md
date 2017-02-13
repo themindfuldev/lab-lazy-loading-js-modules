@@ -10,7 +10,7 @@ You should just edit the source file at src/README.md - the one which stars with
 
 <img src="img/sloth-zootopia.gif" class="logo"></p>
 
-@@author @ [Mobile+Web DevCon 2017](http://mobilewebdevconference.com/san-francisco-2017/) 
+@@author @ [Mobile+Web DevCon](http://mobilewebdevconference.com/san-francisco-2017/) 
 <br/>@@date
 
 ---
@@ -48,6 +48,12 @@ You should just edit the source file at src/README.md - the one which stars with
 
 ---
 
+# Part I
+
+<img src="img/part-i.jpg" />
+
+---
+
 # Agenda
 
 - *Part I: JavaScript Lazy-loading for dummies*
@@ -55,18 +61,6 @@ You should just edit the source file at src/README.md - the one which stars with
   - Lazy-loading 101
   - Do I need Lazy-loading?
   - How to Lazy load?
-- *Part II: Blazing loading*
-  - Modules
-  - Lazy-loading in AMD
-  - Lazy-loading in CommonJS
-  - Lazy-loading in ES2015
-  - Webpack 2
-
----
-
-# Part I
-
-<img src="img/part-i.jpg" />
 
 ---
 
@@ -181,10 +175,21 @@ You should just edit the source file at src/README.md - the one which stars with
 
 ---
 
+## Agenda
+
+- *Part II: Blazing loading*
+  - Modules
+  - Lazy-loading in AMD
+  - Lazy-loading in CommonJS
+  - Lazy-loading in ES2015
+  - Webpack 2
+
+---
+
 ## Module
 
 - *Structural* design pattern
-- Purpose: to define reusable components with private/public attributes and methods.
+- Purpose: to define reusable components with private/public attributes and methods
 - Pre-condition: a chunk of code with a return point
 - Post-condition: a definition that represents that chunk of code as a module
 
@@ -192,7 +197,7 @@ You should just edit the source file at src/README.md - the one which stars with
 
 ## Global object 
 
-- Encapsulation through *closures*, using the function scope.
+- Encapsulation through *closures* -> function scope
 
 ```javascript
   var Zoo = (function() {
@@ -216,7 +221,6 @@ You should just edit the source file at src/README.md - the one which stars with
 var myDog = new Zoo.Dog('Sherlock', 'beagle');
 console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 ```
-<p class="center">[view on Plunker](http://plnkr.co/edit/JEgEpo?p=preview)</p>
 
 ----
 
@@ -241,13 +245,12 @@ console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
   })(); // IIFE
 ```
 
-<p class="center">[view on Plunker](http://plnkr.co/edit/wptpQ5?p=preview)</p>
-
 ----
 
 ## Why to use Modules?
 
-- Global JS is bad for performance, reusability, readability, code organization and allows side-effects.
+- Spaghetti code is bad for reusability, readability, code organization and is very brittle (side-effects).
+- Modules can fix these all if properly implemented.
 - A module can be delivered as a dependency for another module.
 - Modules can be packaged and deployed separately from each other, mitigating the "butterfly effect".
 - Modules bring cohesion up and coupling down.
@@ -286,21 +289,21 @@ console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 
 - Export your module interface with *define()*
 - Import on the client using *require()*
-```
-// dog.js
-define('dog', [], function() {
-  var Dog = function(name, breed) {
-    this.name = name;
-    this.breed = breed;
-  };
-  Dog.prototype.bark = function() {
-    return this.name + ': ' + getBarkStyle(this.breed);
-  };
-  function getBarkStyle(breed) {
-    return breed === 'husky'? 'woooooow!': 'woof, woof!';
-  };
-  return Dog;
-});
+```javascript
+  // dog.js
+  define('dog', [], function() {
+    var Dog = function(name, breed) {
+      this.name = name;
+      this.breed = breed;
+    };
+    Dog.prototype.bark = function() {
+      return this.name + ': ' + getBarkStyle(this.breed);
+    };
+    function getBarkStyle(breed) {
+      return breed === 'husky'? 'woooooow!': 'woof, woof!';
+    };
+    return Dog;
+  });
 ```
 
 ----
@@ -309,7 +312,7 @@ define('dog', [], function() {
 
 - Lazy-loading upon user interaction:
 
-```
+```javascript
 // main.js
 define('main', [], function() {
   document.getElementById('loadDogButton')
@@ -348,22 +351,19 @@ define('main', [], function() {
 
 - Export your module interface with *module.exports*
 - Import on the client using *require(dependency)*
-```
-// dog.js
-var Dog = function(name, breed) {
-  this.name = name;
-  this.breed = breed;
-};
-
-Dog.prototype.bark = function() {
-  return this.name + ': ' + getBarkStyle(this.breed);
-};
-
-function getBarkStyle(breed) {
-  return breed === 'husky'? 'woooooow!': 'woof, woof!';
-};
-
-module.exports = Dog;
+```javascript
+  // dog.js
+  var Dog = function(name, breed) {
+    this.name = name;
+    this.breed = breed;
+  };
+  Dog.prototype.bark = function() {
+    return this.name + ': ' + getBarkStyle(this.breed);
+  };
+  function getBarkStyle(breed) {
+    return breed === 'husky'? 'woooooow!': 'woof, woof!';
+  };
+  module.exports = Dog;
 ```
 
 ----
@@ -387,7 +387,6 @@ document.getElementById('loadDogButton')
     var whisky = new Dog('Whisky', 'husky');
     dogContainer.innerHTML += '<br/>' + whisky.bark();
   });
-
 });
 ```
 
