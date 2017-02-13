@@ -433,13 +433,13 @@ export class Dog {
 - Is performs asynchronous module loading using a Promises-based API.
 - Promises can be chained and combined.
 - *`Promises.all `* can load multiple modules in parallel.
-- System.js 0.2.0 ships with [dynamic import()](https://github.com/tc39/proposal-dynamic-import).
+- System.js 0.2.0 ships with [dynamic import() operator](https://github.com/tc39/proposal-dynamic-import).
 
 ----
 
 ## Lazy-loading in System.js
 
-- Using the [`import()` operator](http://www.2ality.com/2017/01/import-operator.html)
+- Using the [dynamic import() operator](http://www.2ality.com/2017/01/import-operator.html)
 
 ```
 // main.js
@@ -480,6 +480,7 @@ document.getElementById('loadDogButton')
 - Completely lazy-load *`Animations`* and its dependencies upon click of the "Merry Xmas" button.
 - Completely lazy-load *`Messaging`* after 5s the page has been loaded.
 - Verify your lazy-loadable bundles have been generated and are loading properly.
+- Use the [dynamic import() operator](http://www.2ality.com/2017/01/import-operator.html).
 
 ---
 
